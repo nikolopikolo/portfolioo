@@ -1,0 +1,1008 @@
+/* ==========================================================================
+   DEVELOPER PORTFOLIO - MAIN STYLESHEET
+   Aesthetic: Minimalist, clean, industrial, developer-focused dark theme.
+   Architecture: Mobile-first responsive design (375px -> 768px -> 1280px).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+   Easy to customize colors, fonts, and spacing.
+   -------------------------------------------------------------------------- */
+:root {
+  /* Surface & Background Colors */
+  --bg-primary: #0d1117;
+  /* Deep charcoal / near-black */
+  --bg-surface: #161b22;
+  /* Elevated container / card surface */
+  --bg-surface-hover: #1c2128;
+  /* Interactive hover surface */
+  --bg-code: #090d12;
+  /* Monospace code block surface */
+
+  /* Border Colors */
+  --border-subtle: #30363d;
+  /* Crisp hairline border */
+  --border-hover: #484f58;
+  /* Border on interactive hover */
+  --border-muted: #21262d;
+  /* Very subtle internal divider */
+
+  /* Text Colors */
+  --text-primary: #f0f6fc;
+  /* Soft crisp white */
+  --text-secondary: #8b949e;
+  /* Muted gray for readable body text */
+  --text-muted: #6e7681;
+  /* Low-contrast metadata & labels */
+
+  /* Single Restrained Accent Color (Industrial Terminal Sage) */
+  /* Easily swap to steel blue (#58a6ff) or warm amber (#d29922) if desired */
+  --accent: #3fb950;
+  --accent-hover: #46c758;
+  --accent-muted: rgba(63, 185, 80, 0.12);
+  --accent-subtle: rgba(63, 185, 80, 0.05);
+
+  /* Typography */
+  --font-sans: 'Noto Sans Georgian', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, Monaco, monospace;
+
+  /* Layout Spacing & Constrains */
+  --container-max: 1060px;
+  --header-height: 64px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 220ms ease;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE STYLES
+   Ensures zero unwanted margin/padding and sets up strict box-sizing.
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 1.5rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  /* Strict prevention of horizontal scrollbars */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accessible focus ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Accessible Skip Link */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: 1rem;
+  background: var(--accent);
+  color: #000;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  z-index: 1000;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+/* Typography elements */
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-primary);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+ul {
+  list-style: none;
+}
+
+code,
+pre,
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* --------------------------------------------------------------------------
+   3. LAYOUT UTILITIES
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Main content wrapper */
+main {
+  flex: 1;
+}
+
+/* Hairline section styling */
+.section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.section:first-of-type {
+  border-top: none;
+  padding-top: 3rem;
+}
+
+/* Section Header Structure */
+.section-header {
+  margin-bottom: 2.25rem;
+}
+
+.section-label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  color: var(--text-primary);
+}
+
+.section-subtitle {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin-top: 0.4rem;
+  max-width: 60ch;
+}
+
+/* --------------------------------------------------------------------------
+   4. HEADER & NAVIGATION
+   Sticky header with responsive mobile hamburger drawer.
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  height: var(--header-height);
+  background-color: rgba(13, 17, 23, 0.95);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Brand Logo / Monogram */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.brand-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+}
+
+.brand-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--radius-sm);
+}
+
+/* Desktop Nav (hidden by default on mobile-first) */
+.desktop-nav {
+  display: none;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  position: relative;
+  padding: 0.375rem 0;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width var(--transition-fast);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 100%;
+}
+
+/* Hamburger Toggle Button (Mobile) */
+.burger-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: 0;
+  gap: 5px;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.burger-btn:hover {
+  background-color: var(--bg-surface);
+  border-color: var(--border-hover);
+}
+
+.burger-line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: 1px;
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+/* Animated Hamburger to X when open */
+.burger-btn[aria-expanded="true"] .burger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger-btn[aria-expanded="true"] .burger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.burger-btn[aria-expanded="true"] .burger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile Nav Drawer */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1.25rem;
+  z-index: 89;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-nav.is-open {
+  display: block;
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  min-height: 44px;
+  /* Accessible tap target */
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:active {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+.mobile-nav-link .link-index {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   5. HERO / ABOUT SECTION
+   Clean, authoritative, human-written introduction without AI fluff.
+   -------------------------------------------------------------------------- */
+.hero {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3125rem 0.625rem;
+  background-color: var(--accent-subtle);
+  border: 1px solid var(--accent-muted);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.hero-status-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-muted);
+}
+
+.hero-title {
+  font-size: 2.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+.hero-lead {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  max-width: 68ch;
+}
+
+.hero-bio {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 68ch;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  align-items: center;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  min-height: 44px;
+  /* Accessible touch target */
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: 1px solid var(--text-primary);
+}
+
+.btn-primary:hover {
+  background-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   6. SKILLS SECTION
+   Compact, structured columns; simple tag badges instead of giant bloated cards.
+   -------------------------------------------------------------------------- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.skill-category {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: border-color var(--transition-fast);
+}
+
+.skill-category:hover {
+  border-color: var(--border-hover);
+}
+
+.category-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-muted);
+}
+
+.category-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.category-count {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.category-desc {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.125rem;
+  line-height: 1.5;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   7. PROJECTS SECTION & WIP SIGN
+   Restrained, authentic project layout / bold industrial WIP display.
+   -------------------------------------------------------------------------- */
+.wip-container {
+  background-color: var(--bg-surface);
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+}
+
+.wip-container:hover {
+  border-color: var(--accent);
+}
+
+.wip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent);
+  background-color: var(--accent-subtle);
+  border: 1px solid var(--accent-muted);
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.08em;
+  margin-bottom: 1.5rem;
+}
+
+.wip-sign {
+  font-family: var(--font-mono);
+  font-size: clamp(4.5rem, 16vw, 9.5rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1em;
+  margin-bottom: 1rem;
+  user-select: none;
+}
+
+.wip-sign .wip-letter {
+  display: inline-block;
+  background: linear-gradient(180deg, #f0f6fc 35%, #484f58 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.wip-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+.wip-description {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  max-width: 58ch;
+  margin: 0 auto 2rem;
+  line-height: 1.65;
+}
+
+.wip-action {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.project-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.project-card:hover {
+  border-color: var(--border-hover);
+}
+
+.project-top {
+  margin-bottom: 1.25rem;
+}
+
+.project-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+.project-placeholder-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.125rem 0.375rem;
+  background-color: var(--bg-primary);
+  border: 1px dashed var(--border-hover);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+}
+
+.project-title {
+  font-size: 1.1875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.625rem;
+}
+
+.project-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.project-bottom {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.project-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  padding: 0.25rem 0;
+}
+
+.project-link svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  transition: transform var(--transition-fast);
+}
+
+.project-link:hover {
+  color: var(--accent);
+}
+
+.project-link:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* --------------------------------------------------------------------------
+   8. CONTACT SECTION
+   Minimal, honest, no fake non-functioning contact forms.
+   -------------------------------------------------------------------------- */
+.contact-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 1.5rem;
+}
+
+.contact-text {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+  max-width: 65ch;
+}
+
+.contact-channels {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.875rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  min-height: 48px;
+  /* Mobile tap friendly */
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.contact-item:hover {
+  border-color: var(--border-hover);
+  background-color: var(--bg-surface);
+}
+
+.contact-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.contact-value {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.contact-arrow {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.contact-item:hover .contact-arrow {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+/* --------------------------------------------------------------------------
+   9. FOOTER
+   Small, understated footer with copyright and timestamp.
+   -------------------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-primary);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+.back-to-top:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   10. RESPONSIVE BREAKPOINTS (Mobile-First)
+   - 375px: Base mobile (handled natively above)
+   - 640px: Phablet / small tablet
+   - 768px: Tablet / iPad
+   - 1024px: Small desktop / laptop
+   - 1280px: Widescreen desktop
+   ========================================================================== */
+
+/* --- 640px and up --- */
+@media (min-width: 640px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-channels {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- 768px and up (Tablets & Medium Screens) --- */
+@media (min-width: 768px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  /* Switch header navigation: hide hamburger, show horizontal nav */
+  .burger-btn {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: none !important;
+    /* Force hide even if left in open state */
+  }
+
+  .desktop-nav {
+    display: block;
+  }
+
+  /* Projects adapt to 2 columns on tablet */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* --- 1024px and up (Laptops / Desktops) --- */
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 2.875rem;
+  }
+
+  /* Skills expand to 3 balanced columns */
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Projects adapt to 3 columns on desktop, perfectly framing the 3 entries */
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-channels {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- 1280px and up (Wide Screens) --- */
+@media (min-width: 1280px) {
+  .hero {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .hero-title {
+    font-size: 3.125rem;
+  }
+
+  .hero-lead {
+    font-size: 1.125rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. ACCESSIBILITY & PREFERENCES
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .site-header,
+  .site-footer,
+  .btn,
+  .burger-btn {
+    display: none !important;
+  }
+}

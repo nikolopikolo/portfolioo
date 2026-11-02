@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="nikolopikolo — დამწყები Fullstack დეველოპერის პორტფოლიო. უნარები, WIP პროექტები და საკონტაქტო ინფორმაცია.">
+  <meta name="author" content="nikolopikolo">
+  <title>nikolopikolo | დეველოპერის პორტფოლიო</title>
+
+  <!-- Google Fonts: Inter + Noto Sans Georgian + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <!-- ხელმისაწვდომობა (a11y): Skip link კლავიატურით ნავიგაციისთვის -->
+  <a href="#about" class="skip-link">გადასვლა მთავარ კონტენტზე</a>
+
+  <!-- =========================================================================
+       HEADER & NAVIGATION
+       - წებოვანი (sticky) ნავიგაცია სადა ქვედა საზღვრით
+       - Desktop: ჰორიზონტალური მენიუ (>= 768px)
+       - Mobile/Tablet: ფუნქციური ჰამბურგერ მენიუ (< 768px)
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <!-- Logo / დეველოპერის სახელი & სტატუსი -->
+        <a href="#about" class="brand" aria-label="მთავარი გვერდი">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span>nikolopikolo</span>
+          <span class="brand-tag">dev</span>
+        </a>
+
+        <!-- Desktop ნავიგაცია (ჩანს >= 768px ეკრანებზე) -->
+        <nav class="desktop-nav" aria-label="მთავარი ნავიგაცია">
+          <ul class="nav-list">
+            <li><a href="#about" class="nav-link">ჩემ შესახებ</a></li>
+            <li><a href="#skills" class="nav-link">უნარები</a></li>
+            <li><a href="#projects" class="nav-link">პროექტები</a></li>
+            <li><a href="#contact" class="nav-link">კონტაქტი</a></li>
+          </ul>
+        </nav>
+
+        <!-- მობილური ჰამბურგერ ღილაკი (ჩანს < 768px ეკრანებზე) -->
+        <button 
+          id="burger-btn" 
+          class="burger-btn" 
+          type="button" 
+          aria-label="მენიუს გახსნა" 
+          aria-expanded="false" 
+          aria-controls="mobile-nav"
+        >
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- მობილური ნავიგაციის ჩამოსაშლელი კონტეინერი -->
+  <nav id="mobile-nav" class="mobile-nav" aria-label="მობილური ნავიგაცია">
+    <ul class="mobile-nav-list">
+      <li>
+        <a href="#about" class="mobile-nav-link">
+          <span>ჩემ შესახებ</span>
+          <span class="link-index">// 01</span>
+        </a>
+      </li>
+      <li>
+        <a href="#skills" class="mobile-nav-link">
+          <span>უნარები</span>
+          <span class="link-index">// 02</span>
+        </a>
+      </li>
+      <li>
+        <a href="#projects" class="mobile-nav-link">
+          <span>პროექტები</span>
+          <span class="link-index">// 03</span>
+        </a>
+      </li>
+      <li>
+        <a href="#contact" class="mobile-nav-link">
+          <span>კონტაქტი</span>
+          <span class="link-index">// 04</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- =========================================================================
+       მთავარი კონტენტი (MAIN)
+       ========================================================================= -->
+  <main id="main-content">
+
+    <!-- -----------------------------------------------------------------------
+         HERO / ჩემ შესახებ სექცია
+         ----------------------------------------------------------------------- -->
+    <section id="about" class="section hero">
+      <div class="container">
+        <!-- სტატუსის ბეიჯი -->
+        <div class="hero-status">
+          <span class="hero-status-pulse" aria-hidden="true"></span>
+          <span>მოგესალმებით ჩემს პორტფოლიოში</span>
+        </div>
+
+        <h1 class="hero-title">
+          ჩემ შესახებ
+        </h1>
+
+        <p class="hero-lead">
+          გამარჯობა! მე ვარ დამწყები Fullstack დეველოპერი, დაინტერესებული ვარ თანამედროვე ვებ-ტექნოლოგიებით, სუფთა კოდის წერითა და ფუნქციონალური ვებ-აპლიკაციების შექმნით.
+        </p>
+
+        <p class="hero-bio">
+          მიყვარს პრაქტიკული პროექტების აწყობა, ახალი ტექნოლოგიების შესწავლა და მარტივი, სწრაფი და მოსახერხებელი ინტერფეისების შექმნა. ამჟამად აქტიურად ვმუშაობ საკუთარ პროექტებზე და ვსწავლობ თანამედროვე ვებ-სტანდარტებსა და არქიტექტურას.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            <span>პროექტების ნახვა</span>
+            <span aria-hidden="true">&darr;</span>
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <span>დამიკავშირდით</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------------
+         უნარების სექცია (SKILLS)
+         კომპაქტური სვეტები და ტეგები
+         ----------------------------------------------------------------------- -->
+    <section id="skills" class="section">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">// 01. ტექნიკური კომპეტენციები</span>
+          <h2 class="section-title">უნარები & ტექნოლოგიები</h2>
+          <p class="section-subtitle">
+            ტექნოლოგიები და ხელსაწყოები, რომლებსაც ვიყენებ ვებ-დეველოპმენტში.
+          </p>
+        </header>
+
+        <div class="skills-grid">
+          <!-- Frontend -->
+          <div class="skill-category">
+            <div class="category-header">
+              <h3 class="category-title">Frontend</h3>
+              <span class="category-count">06 ტეგი</span>
+            </div>
+            <p class="category-desc">სემანტიკური მარკირება, ადაპტური დიზაინი და კლიენტის ლოგიკა.</p>
+            <ul class="tags-list" aria-label="Frontend უნარები">
+              <li class="tag">HTML5</li>
+              <li class="tag">CSS3 / Modern CSS</li>
+              <li class="tag">JavaScript (ES6+)</li>
+              <li class="tag">TypeScript</li>
+              <li class="tag">React</li>
+              <li class="tag">Tailwind CSS</li>
+            </ul>
+          </div>
+
+          <!-- Backend -->
+          <div class="skill-category">
+            <div class="category-header">
+              <h3 class="category-title">Backend</h3>
+              <span class="category-count">05 ტეგი</span>
+            </div>
+            <p class="category-desc">სერვერული ლოგიკა, REST API-ები და მონაცემთა ბაზები.</p>
+            <ul class="tags-list" aria-label="Backend უნარები">
+              <li class="tag">Node.js</li>
+              <li class="tag">Express</li>
+              <li class="tag">Python</li>
+              <li class="tag">PostgreSQL</li>
+              <li class="tag">RESTful APIs</li>
+            </ul>
+          </div>
+
+          <!-- Tools & Workflow -->
+          <div class="skill-category">
+            <div class="category-header">
+              <h3 class="category-title">Tools & Workflow</h3>
+              <span class="category-count">06 ტეგი</span>
+            </div>
+            <p class="category-desc">ვერსიების კონტროლი, CLI გარემო და სამუშაო ხელსაწყოები.</p>
+            <ul class="tags-list" aria-label="ხელსაწყოები და სამუშაო გარემო">
+              <li class="tag">Git</li>
+              <li class="tag">GitHub</li>
+              <li class="tag">VS Code</li>
+              <li class="tag">Bash / CLI</li>
+              <li class="tag">Docker</li>
+              <li class="tag">Figma</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------------
+         პროექტების სექცია (PROJECTS - BIG WIP SIGN)
+         ----------------------------------------------------------------------- -->
+    <section id="projects" class="section">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">// 02. ნამუშევრები</span>
+          <h2 class="section-title">პროექტები</h2>
+        </header>
+
+        <!-- Big WIP Container -->
+        <div class="wip-container">
+          <div class="wip-badge">
+            <span class="hero-status-pulse" aria-hidden="true"></span>
+            <span>// CURRENT STATUS: IN DEVELOPMENT</span>
+          </div>
+
+          <div class="wip-sign" aria-label="WIP - Work In Progress">
+            <span class="wip-letter">W</span>
+            <span class="wip-letter">I</span>
+            <span class="wip-letter">P</span>
+          </div>
+
+          <p class="wip-subtitle">[ WORK IN PROGRESS ]</p>
+
+          <p class="wip-description">
+            პროექტების სექცია აქტიური დამუშავების პროცესშია. ახალი კოდის, რეპოზიტორიებისა და მიმდინარე ვებ-პროექტების სანახავად გადადით ჩემს ოფიციალურ GitHub გვერდზე.
+          </p>
+
+          <div class="wip-action">
+            <a 
+              href="https://github.com/nikolopikolo" 
+              class="btn btn-primary"
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="ეწვიეთ nikolopikolo-ს GitHub გვერდს"
+            >
+              <span>GitHub-ზე გადასვლა</span>
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------------
+         საკონტაქტო სექცია (CONTACT)
+         მარტივი, ფუნქციური და მინიმალისტური (უსარგებლო ფორმების გარეშე)
+         ----------------------------------------------------------------------- -->
+    <section id="contact" class="section">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">// 03. კავშირი</span>
+          <h2 class="section-title">დამიკავშირდით</h2>
+          <p class="section-subtitle">
+            ღია ვარ ახალი შესაძლებლობებისთვის, სტაჟირებისა და საინტერესო პროექტებისთვის.
+          </p>
+        </header>
+
+        <div class="contact-card">
+          <p class="contact-text">
+            თუ გაინტერესებთ თანამშრომლობა ან გსურთ კოდსა და პროექტებზე საუბარი, მომწერეთ ელ-ფოსტაზე ან ეწვიეთ ჩემს GitHub პროფილს.
+          </p>
+
+          <div class="contact-channels">
+            <!-- GitHub Channel -->
+            <a 
+              href="https://github.com/nikolopikolo" 
+              class="contact-item" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label="ეწვიეთ nikolopikolo-ს GitHub პროფილს"
+            >
+              <div class="contact-item-left">
+                <div>
+                  <span class="contact-label">GitHub</span>
+                  <div class="contact-value">github.com/nikolopikolo</div>
+                </div>
+              </div>
+              <span class="contact-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+
+            <!-- Email Channel -->
+            <a 
+              href="mailto:nikolo.developer@example.com" 
+              class="contact-item"
+              data-copy-email="nikolo.developer@example.com"
+              aria-label="ელ-ფოსტის გაგზავნა"
+            >
+              <div class="contact-item-left">
+                <div>
+                  <span class="contact-label">Email</span>
+                  <div class="contact-value">nikolo.developer@example.com</div>
+                </div>
+              </div>
+              <span class="contact-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p>&copy; 2026 nikolopikolo. შექმნილია სემანტიკური HTML, CSS და JS ტექნოლოგიებით.</p>
+        <div class="footer-meta">
+          <span>GitHub Pages</span>
+          <a href="#about" class="back-to-top" aria-label="გვერდის თავში დაბრუნება">
+            <span>თავში დაბრუნება</span>
+            <span aria-hidden="true">&uarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript -->
+  <script src="./js/main.js"></script>
+</body>
+</html>
