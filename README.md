@@ -1,5 +1,5 @@
-# nikolopikolo — Developer Portfolio
 
+<<<<<<< HEAD
 მინიმალისტური, თანამედროვე და სრულად ადაპტური (responsive) Fullstack დეველოპერის პორტფოლიო, შექმნილი **მხოლოდ ერთი `index.html` ფაილით**.
 
 - **GitHub პროფილი**: [https://github.com/nikolopikolo](https://github.com/nikolopikolo)
@@ -35,3 +35,5 @@
    git push -u origin main
    ```
 3. GitHub-ზე გადადით **Settings** > **Pages** > აირჩიეთ `main` branch და დააჭირეთ **Save**.
+=======
+>>>>>>> 291b1053504524e35c80a262db14598ca5287b25
