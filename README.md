@@ -1,39 +1,60 @@
+# nikolopikolo — Developer Portfolio (Geolab Homework)
 
-<<<<<<< HEAD
-მინიმალისტური, თანამედროვე და სრულად ადაპტური (responsive) Fullstack დეველოპერის პორტფოლიო, შექმნილი **მხოლოდ ერთი `index.html` ფაილით**.
+მინიმალისტური, თანამედროვე და სრულად ადაპტური (responsive) Fullstack დეველოპერის პორტფოლიო ინტეგრირებული REST API ფუნქციონალით (Geolab დავალება).
 
 - **GitHub პროფილი**: [https://github.com/nikolopikolo](https://github.com/nikolopikolo)
 
 ---
 
-## მახასიათებლები
+## განხორციელებული დავალებები (Tasks)
 
-- **Single-File HTML**: მთელი საიტი (სემანტიკური HTML, ჩაშენებული სტილები `<style>` და JavaScript ლოგიკა `<script>`) თავმოყრილია ერთ `index.html` ფაილში. არ საჭიროებს გარე ფაილებს ან build ხელსაწყოებს.
-- **დიზაინის მიმართულება**: მინიმალისტური, ინდუსტრიული Dark Theme (Charcoal ფონი, რბილი თეთრი ტექსტი და ტერმინალის მდუმარე მწვანე აქცენტი).
-- **არ შეიცავს AI-სტერეოტიპებს**: არ არის გამოყენებული ზედმეტი გრადიენტები, blur-ეფექტები, მცურავი ბურთები და ყალბი სტატისტიკა.
-- **სრული ადაპტურობა (Mobile-First)**:
-  - **375px (Mobile)**: ერთსვეტიანი სუფთა განლაგება, ხელმისაწვდომი ბურგერ მენიუ.
-  - **768px (Tablet)**: გადასვლა ჰორიზონტალურ ნავიგაციაზე; უნარები ნაწილდება 2 სვეტად.
-  - **1024px – 1280px+ (Desktop)**: უნარები იშლება 3 სვეტად.
-- **WIP ნიშანი**: პროექტების სექციაში განთავსებულია გამორჩეული ინდუსტრიული WIP (Work In Progress) ბანერი პირდაპირი ბმულით `github.com/nikolopikolo`-ზე.
-- **მზადაა GitHub Pages-ისთვის**: შეგიძლიათ პირდაპირ ატვირთოთ `index.html` GitHub-ზე და გაუშვათ GitHub Pages-ით.
+### 1. ადაპტური მობილური ნავიგაცია (Mobile Navigation)
+- დესკტოპზე (>= 768px) შენარჩუნებულია ჰორიზონტალური ნავიგაციის ზოლი.
+- მობილურ ეკრანებზე (< 768px, მათ შორის 320px, 375px, 425px) გამოჩნდება ხელმისაწვდომი ჰამბურგერ მენიუ.
+- ჰამბურგერ ღილაკზე დაჭერით იხსნება/იხურება მენიუ.
+- მენიუს ნებისმიერ ბმულზე დაჭერით გვერდი გადადის შესაბამის სექციაზე და მენიუ ავტომატურად იხურება.
+- მენიუს გახსნა/დახურვა მხარდაჭერილია კლავიატურის <kbd>Escape</kbd> ღილაკით და გარედან დაწკაპუნებით.
+- გამოიყენება ARIA ატრიბუტები (`aria-expanded`, `aria-controls`, `aria-label`).
+
+### 2. თანამშრომლების სექცია (Employees Section)
+- ნავიგაციაში დამატებულია პუნქტი **თანამშრომლები (Employees)** (`#employees`).
+- მონაცემები დინამიკურად იტვირთება API-დან: `https://jsonplaceholder.typicode.com/users` `fetch()`-ისა და `async/await`-ის გამოყენებით.
+- გამოდის 10-ვე მომხმარებელი ადაპტური ბარათების სახით (სახელი, იუზერნეიმი, ელ-ფოსტა, ტელეფონი, კომპანიის სახელი, ვებსაიტი).
+- გამოყენებულია უსაფრთხო DOM მანიპულაცია (`document.createElement`, `textContent`) `innerHTML`-ის ნაცვლად.
+- რეალიზებულია ჩატვირთვის (Loading spinner) და შეცდომის (Error state) შეტყობინებები.
+- განლაგება ადაპტურია: 1 სვეტი მობილურზე, 2 სვეტი ტაბლეტზე, 3 სვეტი დესკტოპზე.
+
+### 3. პოსტების სექცია და "Load More" (Posts Section)
+- ნავიგაციაში დამატებულია პუნქტი **პოსტები (Posts)** (`#posts`).
+- მონაცემები იტვირთება API-დან: `https://jsonplaceholder.typicode.com/posts`.
+- საწყის ეტაპზე იტვირთება და ჩნდება პირველი 6 პოსტი (სათაური და ტექსტი).
+- დამატებულია ღილაკი **მეტის ჩატვირთვა (Load More)**, რომელზე დაჭერითაც გვერდის გადატვირთვის გარეშე იტვირთება და ემატება შემდეგი 6 პოსტი.
+- დამუშავებულია Loading და Error სტატუსები.
+
+### 4. პროექტები (Projects)
+- წარმოდგენილია დასრულებული პროექტი **PixelGallery** (Android / Wear OS Development) Kotlin-ზე შექმნილი Google Pixel Watch 3-ისთვის, პირდაპირი GitHub ბმულით (`https://github.com/nikolopikolo/PixelGallery`).
+
+### 5. კოდის ხარისხი და ადაპტურობა
+- პროექტი იყენებს სემანტიკურ HTML5-ს, სუფთა CSS-ს და მოდულარულ `script.js` ფაილს.
+- საიტი ტესტირებულია 320px, 375px, 425px, 768px და 1024px+ რეზოლუციებზე ჰორიზონტალური სქროლის გარეშე.
+
+---
+
+## ფაილების სტრუქტურა
+
+```
+portfolioo/
+├── index.html        # სემანტიკური HTML5 სტრუქტურა და ჩაშენებული CSS სტილები
+├── script.js         # JavaScript: მენიუ, scrollspy, თანამშრომლები და პოსტების API
+└── README.md         # დოკუმენტაცია
+```
 
 ---
 
 ## GitHub Pages-ზე ატვირთვა
 
-1. ინიციალიზაცია და commit:
-   ```bash
-   git init
-   git add index.html README.md
-   git commit -m "Initial commit: single-file HTML developer portfolio"
-   ```
-2. შექმენით რეპოზიტორი GitHub-ზე და დააკავშირეთ:
-   ```bash
-   git remote add origin https://github.com/nikolopikolo/<repo-name>.git
-   git branch -M main
-   git push -u origin main
-   ```
-3. GitHub-ზე გადადით **Settings** > **Pages** > აირჩიეთ `main` branch და დააჭირეთ **Save**.
-=======
->>>>>>> 291b1053504524e35c80a262db14598ca5287b25
+```bash
+git add .
+git commit -m "Complete Geolab homework: mobile nav, employees API, posts with load more"
+git push origin main
+```

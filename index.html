@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="nikolopikolo — დამწყები Fullstack დეველოპერის პორტფოლიო. უნარები, WIP პროექტები და საკონტაქტო ინფორმაცია.">
+  <meta name="description" content="nikolopikolo — დამწყები Fullstack დეველოპერის პორტფოლიო. უნარები, პროექტები, თანამშრომლები, პოსტები და საკონტაქტო ინფორმაცია.">
   <meta name="author" content="nikolopikolo">
   <title>nikolopikolo | დეველოპერის პორტფოლიო</title>
 
@@ -13,8 +13,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- =========================================================================
-       CSS STYLES (Single-File Embedded Stylesheet)
-       Mobile-first responsive architecture: 375px -> 640px -> 768px -> 1024px -> 1280px
+       CSS STYLES
+       Mobile-first responsive architecture: 320px -> 375px -> 640px -> 768px -> 1024px -> 1280px
        ========================================================================= -->
   <style>
     /* --------------------------------------------------------------------------
@@ -151,6 +151,13 @@
       padding-right: 1.25rem;
     }
 
+    @media (max-width: 360px) {
+      .container {
+        padding-left: 0.875rem;
+        padding-right: 0.875rem;
+      }
+    }
+
     main {
       flex: 1;
     }
@@ -249,15 +256,16 @@
     .nav-list {
       display: flex;
       align-items: center;
-      gap: 1.75rem;
+      gap: 1rem;
     }
 
     .nav-link {
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
       font-weight: 500;
       color: var(--text-secondary);
       position: relative;
       padding: 0.375rem 0;
+      white-space: nowrap;
     }
 
     .nav-link:hover {
@@ -311,6 +319,7 @@
       transition: transform var(--transition-normal), opacity var(--transition-normal);
     }
 
+    /* Animated Hamburger to X when open */
     .burger-btn[aria-expanded="true"] .burger-line:nth-child(1) {
       transform: translateY(7px) rotate(45deg);
     }
@@ -333,13 +342,27 @@
       right: 0;
       background-color: var(--bg-primary);
       border-bottom: 1px solid var(--border-subtle);
-      padding: 1.25rem;
+      padding: 1rem 1.25rem;
       z-index: 89;
       box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+      max-height: calc(100vh - var(--header-height));
+      overflow-y: auto;
     }
 
     .mobile-nav.is-open {
       display: block;
+      animation: mobileNavFade 0.2s ease forwards;
+    }
+
+    @keyframes mobileNavFade {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .mobile-nav-list {
@@ -550,86 +573,296 @@
     }
 
     /* --------------------------------------------------------------------------
-       7. PROJECTS SECTION & BIG WIP SIGN
+       7. PROJECTS SECTION & PROJECT CARDS
        -------------------------------------------------------------------------- */
-    .wip-container {
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .project-card {
       background-color: var(--bg-surface);
-      border: 1px dashed var(--border-hover);
-      border-radius: var(--radius-lg);
-      padding: 3.5rem 1.5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      word-break: break-word;
       transition: border-color var(--transition-fast);
     }
 
-    .wip-container:hover {
-      border-color: var(--accent);
+    .project-card:hover {
+      border-color: var(--border-hover);
     }
 
-    .wip-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--accent);
-      background-color: var(--accent-subtle);
-      border: 1px solid var(--accent-muted);
-      padding: 0.25rem 0.625rem;
-      border-radius: var(--radius-sm);
-      letter-spacing: 0.08em;
-      margin-bottom: 1.5rem;
-    }
-
-    .wip-sign {
-      font-family: var(--font-mono);
-      font-size: clamp(4.5rem, 16vw, 9.5rem);
-      font-weight: 800;
-      line-height: 0.9;
-      letter-spacing: 0.08em;
-      color: var(--text-primary);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.1em;
-      margin-bottom: 1rem;
-      user-select: none;
-    }
-
-    .wip-sign .wip-letter {
-      display: inline-block;
-      background: linear-gradient(180deg, #f0f6fc 35%, #484f58 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .wip-subtitle {
-      font-family: var(--font-mono);
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      color: var(--accent);
+    .project-top {
       margin-bottom: 1.25rem;
     }
 
-    .wip-description {
+    .project-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .project-category {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .project-status-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.125rem 0.5rem;
+      background-color: var(--accent-subtle);
+      border: 1px solid var(--accent-muted);
+      color: var(--accent);
+      border-radius: var(--radius-sm);
+    }
+
+    .project-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.625rem;
+    }
+
+    .project-desc {
       font-size: 0.9375rem;
       color: var(--text-secondary);
-      max-width: 58ch;
-      margin: 0 auto 2rem;
       line-height: 1.65;
     }
 
-    .wip-action {
+    .project-bottom {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-muted);
       display: flex;
-      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .project-links {
+      display: flex;
+      align-items: center;
       gap: 1rem;
     }
 
     /* --------------------------------------------------------------------------
-       8. CONTACT SECTION
+       8. API STATUS & LOADING SPINNER
+       -------------------------------------------------------------------------- */
+    .api-status {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .api-status.api-status-error {
+      color: #f85149;
+      border-color: rgba(248, 81, 73, 0.4);
+      background-color: rgba(248, 81, 73, 0.08);
+    }
+
+    .loading-spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border-subtle);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       9. EMPLOYEES SECTION
+       -------------------------------------------------------------------------- */
+    .employees-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .employee-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      word-break: break-word;
+      transition: border-color var(--transition-fast);
+    }
+
+    .employee-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .employee-header {
+      margin-bottom: 0.75rem;
+    }
+
+    .employee-name {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .employee-username {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    .employee-company {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-muted);
+    }
+
+    .employee-company-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-right: 0.35rem;
+    }
+
+    .employee-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.75rem;
+    }
+
+    .employee-detail-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+    }
+
+    .employee-detail-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      width: 48px;
+      flex-shrink: 0;
+    }
+
+    .employee-detail-link {
+      color: var(--text-secondary);
+      transition: color var(--transition-fast);
+    }
+
+    .employee-detail-link:hover {
+      color: var(--accent);
+    }
+
+    /* --------------------------------------------------------------------------
+       10. POSTS SECTION
+       -------------------------------------------------------------------------- */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .post-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      word-break: break-word;
+      transition: border-color var(--transition-fast);
+    }
+
+    .post-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .post-id {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .post-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.35;
+      text-transform: capitalize;
+    }
+
+    .post-body {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .posts-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    /* --------------------------------------------------------------------------
+       11. CONTACT SECTION
        -------------------------------------------------------------------------- */
     .contact-card {
       background-color: var(--bg-surface);
@@ -700,7 +933,7 @@
     }
 
     /* --------------------------------------------------------------------------
-       9. FOOTER
+       12. FOOTER
        -------------------------------------------------------------------------- */
     .site-footer {
       border-top: 1px solid var(--border-subtle);
@@ -738,7 +971,7 @@
     }
 
     /* --------------------------------------------------------------------------
-       10. RESPONSIVE BREAKPOINTS (Mobile-First)
+       13. RESPONSIVE BREAKPOINTS (Mobile-First)
        -------------------------------------------------------------------------- */
     @media (min-width: 640px) {
       .hero-title {
@@ -746,6 +979,11 @@
       }
 
       .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .employees-grid,
+      .posts-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -782,10 +1020,20 @@
         display: block;
       }
 
+      .nav-list {
+        gap: 0.875rem;
+      }
+
       .footer-inner {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .nav-list {
+        gap: 1.25rem;
       }
     }
 
@@ -798,8 +1046,21 @@
         grid-template-columns: repeat(3, 1fr);
       }
 
+      .employees-grid,
+      .posts-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
       .contact-channels {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-list {
+        gap: 1.5rem;
+      }
+
+      .nav-link {
+        font-size: 0.875rem;
       }
     }
 
@@ -873,6 +1134,8 @@
             <li><a href="#about" class="nav-link">ჩემ შესახებ</a></li>
             <li><a href="#skills" class="nav-link">უნარები</a></li>
             <li><a href="#projects" class="nav-link">პროექტები</a></li>
+            <li><a href="#employees" class="nav-link">თანამშრომლები</a></li>
+            <li><a href="#posts" class="nav-link">პოსტები</a></li>
             <li><a href="#contact" class="nav-link">კონტაქტი</a></li>
           </ul>
         </nav>
@@ -916,9 +1179,21 @@
         </a>
       </li>
       <li>
+        <a href="#employees" class="mobile-nav-link">
+          <span>თანამშრომლები</span>
+          <span class="link-index">// 04</span>
+        </a>
+      </li>
+      <li>
+        <a href="#posts" class="mobile-nav-link">
+          <span>პოსტები</span>
+          <span class="link-index">// 05</span>
+        </a>
+      </li>
+      <li>
         <a href="#contact" class="mobile-nav-link">
           <span>კონტაქტი</span>
-          <span class="link-index">// 04</span>
+          <span class="link-index">// 06</span>
         </a>
       </li>
     </ul>
@@ -1032,46 +1307,116 @@
     </section>
 
     <!-- -----------------------------------------------------------------------
-         პროექტების სექცია (BIG WIP SIGN)
+         პროექტების სექცია (PROJECTS)
          ----------------------------------------------------------------------- -->
     <section id="projects" class="section">
       <div class="container">
         <header class="section-header">
           <span class="section-label">// 02. ნამუშევრები</span>
           <h2 class="section-title">პროექტები</h2>
+          <p class="section-subtitle">
+            შესრულებული და მიმდინარე პროექტები.
+          </p>
         </header>
 
-        <!-- Big Industrial WIP Container -->
-        <div class="wip-container">
-          <div class="wip-badge">
-            <span class="hero-status-pulse" aria-hidden="true"></span>
-            <span>// CURRENT STATUS: IN DEVELOPMENT</span>
-          </div>
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+          <!-- PixelGallery Project Card -->
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-meta">
+                <span class="project-category">Android / Wear OS Development</span>
+                <span class="project-status-tag">Completed • Open Source</span>
+              </div>
+              <h3 class="project-title">PixelGallery</h3>
+              <p class="project-desc">
+                ფოტო გალერეის აპლიკაცია Wear OS-ისა (Google Pixel Watch 3) და Android სმარტფონებისთვის. შედგება ორი დაკავშირებული აპლიკაციისგან, რაც საშუალებას გაძლევთ უსადენოდ გადაიტანოთ ფოტოები ლოკალური Wi-Fi ქსელით და დაათვალიეროთ ისინი ოფლაინში სმარტ-საათის ეკრანზე.
+              </p>
+            </div>
 
-          <div class="wip-sign" aria-label="WIP - Work In Progress">
-            <span class="wip-letter">W</span>
-            <span class="wip-letter">I</span>
-            <span class="wip-letter">P</span>
-          </div>
+            <div class="project-bottom">
+              <div class="project-tags">
+                <span class="tag">Kotlin</span>
+                <span class="tag">Android</span>
+                <span class="tag">Wear OS</span>
+                <span class="tag">Local Wi-Fi</span>
+                <span class="tag">Pixel Watch 3</span>
+              </div>
+              <div class="project-links">
+                <a 
+                  href="https://github.com/nikolopikolo/PixelGallery" 
+                  class="btn btn-secondary" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="View PixelGallery on GitHub"
+                >
+                  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                  <span>GitHub Repository</span>
+                  <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <p class="wip-subtitle">[ WORK IN PROGRESS ]</p>
-
-          <p class="wip-description">
-            პროექტების სექცია აქტიური დამუშავების პროცესშია. ახალი კოდის, რეპოზიტორიებისა და მიმდინარე ვებ-პროექტების სანახავად გადადით ჩემს ოფიციალურ GitHub გვერდზე.
+    <!-- -----------------------------------------------------------------------
+         თანამშრომლების სექცია (EMPLOYEES)
+         დინამიკურად იტვირთება JSONPlaceholder /users API-დან
+         ----------------------------------------------------------------------- -->
+    <section id="employees" class="section">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">// 03. გუნდი & პარტნიორები</span>
+          <h2 class="section-title">თანამშრომლები (Employees)</h2>
+          <p class="section-subtitle">
+            თანამშრომელთა სია იტვირთება დინამიკურად JSONPlaceholder API-დან.
           </p>
+        </header>
 
-          <div class="wip-action">
-            <a 
-              href="https://github.com/nikolopikolo" 
-              class="btn btn-primary"
-              target="_blank" 
-              rel="noopener noreferrer"
-              aria-label="ეწვიეთ nikolopikolo-ს GitHub გვერდს"
-            >
-              <span>GitHub-ზე გადასვლა</span>
-              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-            </a>
-          </div>
+        <!-- Loading / Error ინდიკატორი -->
+        <div id="employees-status" class="api-status" aria-live="polite">
+          <span class="loading-spinner" aria-hidden="true"></span>
+          <span>თანამშრომლების ჩატვირთვა...</span>
+        </div>
+
+        <!-- თანამშრომლების ბარათების ბადე -->
+        <div id="employees-grid" class="employees-grid" aria-label="თანამშრომლების სია"></div>
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------------
+         პოსტების სექცია (POSTS)
+         დინამიკურად იტვირთება JSONPlaceholder /posts API-დან Load More ღილაკით
+         ----------------------------------------------------------------------- -->
+    <section id="posts" class="section">
+      <div class="container">
+        <header class="section-header">
+          <span class="section-label">// 04. პუბლიკაციები</span>
+          <h2 class="section-title">პოსტები (Posts)</h2>
+          <p class="section-subtitle">
+            სტატიები და ჩანაწერები JSONPlaceholder API-დან.
+          </p>
+        </header>
+
+        <!-- Loading / Error ინდიკატორი -->
+        <div id="posts-status" class="api-status" aria-live="polite">
+          <span class="loading-spinner" aria-hidden="true"></span>
+          <span>პოსტების ჩატვირთვა...</span>
+        </div>
+
+        <!-- პოსტების ბადე -->
+        <div id="posts-grid" class="posts-grid" aria-label="პოსტების სია"></div>
+
+        <!-- მეტის ჩატვირთვის ღილაკი -->
+        <div class="posts-actions">
+          <button id="load-more-posts-btn" class="btn btn-secondary" type="button" style="display: none;">
+            <span>მეტის ჩატვირთვა (Load More)</span>
+            <span aria-hidden="true">&darr;</span>
+          </button>
         </div>
       </div>
     </section>
@@ -1082,7 +1427,7 @@
     <section id="contact" class="section">
       <div class="container">
         <header class="section-header">
-          <span class="section-label">// 03. კავშირი</span>
+          <span class="section-label">// 05. კავშირი</span>
           <h2 class="section-title">დამიკავშირდით</h2>
           <p class="section-subtitle">
             ღია ვარ ახალი შესაძლებლობებისთვის, სტაჟირებისა და საინტერესო პროექტებისთვის.
@@ -1153,138 +1498,8 @@
   </footer>
 
   <!-- =========================================================================
-       JAVASCRIPT (Embedded Client Logic)
+       JAVASCRIPT
        ========================================================================= -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      initMobileNavigation();
-      initActiveNavHighlight();
-      initEmailCopyHelper();
-    });
-
-    /**
-     * Mobile Navigation (Hamburger Menu)
-     */
-    function initMobileNavigation() {
-      const burgerBtn = document.getElementById('burger-btn');
-      const mobileNav = document.getElementById('mobile-nav');
-
-      if (!burgerBtn || !mobileNav) return;
-
-      function toggleMenu(forceClose = false) {
-        const isCurrentlyExpanded = burgerBtn.getAttribute('aria-expanded') === 'true';
-        const shouldOpen = forceClose ? false : !isCurrentlyExpanded;
-
-        burgerBtn.setAttribute('aria-expanded', String(shouldOpen));
-        burgerBtn.setAttribute('aria-label', shouldOpen ? 'მენიუს დახურვა' : 'მენიუს გახსნა');
-        
-        if (shouldOpen) {
-          mobileNav.classList.add('is-open');
-          document.body.style.overflow = 'hidden';
-        } else {
-          mobileNav.classList.remove('is-open');
-          document.body.style.overflow = '';
-        }
-      }
-
-      burgerBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMenu();
-      });
-
-      const mobileLinks = mobileNav.querySelectorAll('a');
-      mobileLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-          toggleMenu(true);
-        });
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileNav.classList.contains('is-open')) {
-          toggleMenu(true);
-          burgerBtn.focus();
-        }
-      });
-
-      document.addEventListener('click', (e) => {
-        if (mobileNav.classList.contains('is-open')) {
-          const isInsideMenu = mobileNav.contains(e.target);
-          const isInsideBurger = burgerBtn.contains(e.target);
-          if (!isInsideMenu && !isInsideBurger) {
-            toggleMenu(true);
-          }
-        }
-      });
-
-      window.addEventListener('resize', () => {
-        if (window.innerWidth >= 768 && mobileNav.classList.contains('is-open')) {
-          toggleMenu(true);
-        }
-      });
-    }
-
-    /**
-     * Scrollspy / Active Navigation Highlighting
-     */
-    function initActiveNavHighlight() {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
-
-      if (!sections.length || !navLinks.length) return;
-
-      const observerOptions = {
-        root: null,
-        rootMargin: '-20% 0px -70% 0px',
-        threshold: 0
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('id');
-            navLinks.forEach((link) => {
-              const href = link.getAttribute('href');
-              if (href === `#${id}`) {
-                link.style.color = 'var(--text-primary)';
-              } else {
-                link.style.color = '';
-              }
-            });
-          }
-        });
-      }, observerOptions);
-
-      sections.forEach((section) => observer.observe(section));
-    }
-
-    /**
-     * Helper: Copy Email to Clipboard with UI feedback
-     */
-    function initEmailCopyHelper() {
-      const emailItem = document.querySelector('[data-copy-email]');
-      if (!emailItem) return;
-
-      emailItem.addEventListener('click', async () => {
-        const email = emailItem.getAttribute('data-copy-email');
-        if (!email) return;
-
-        try {
-          await navigator.clipboard.writeText(email);
-          const label = emailItem.querySelector('.contact-label');
-          if (label) {
-            const originalText = label.textContent;
-            label.textContent = 'დაკოპირდა!';
-            label.style.color = 'var(--accent)';
-            setTimeout(() => {
-              label.textContent = originalText;
-              label.style.color = '';
-            }, 2000);
-          }
-        } catch {
-          // Fallback: default mailto executes
-        }
-      });
-    }
-  </script>
+  <script src="./script.js"></script>
 </body>
 </html>
